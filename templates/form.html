@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Contact Form</h2>
+
+  {% if form.errors %}
+    <ul class="form-errors">
+      {% for field_errors in form.errors.values() %}
+        {% for error in field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+      {{ form.name.label }}<br>
+      {{ form.name(size=32) }}
+    </div>
+
+    <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+      {{ form.email.label }}<br>
+      {{ form.email(size=32) }}
+    </div>
+
+    <div class="form-group {% if form.message.errors %}has-error{% endif %}">
+      {{ form.message.label }}<br>
+      {{ form.message(size=40) }}
+    </div>
+
+    {{ form.submit() }}
+  </form>
+{% endblock %}
